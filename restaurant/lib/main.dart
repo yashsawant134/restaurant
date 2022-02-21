@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant/screens/TableBooking.dart';
-
+import 'package:restaurant/BottomNav/BottomNavBar.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
        primarySwatch: Colors.blue,
       ),
-      home: TableBooking(),
+      home: BottomNavBar(),
     );
   }
 }
