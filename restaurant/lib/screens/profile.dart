@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant/Constants/Colours.dart';
+import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:flutter_qr_bar_scanner/qr_bar_scanner_camera.dart';
 
+import 'MenuScreen.dart';
 class Profile extends StatefulWidget {
-  const Profile({ Key? key }) : super(key: key);
+  const Profile({Key? key}) : super(key: key);
 
   @override
   _ProfileState createState() => _ProfileState();
@@ -11,10 +14,6 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
-      color: Colours.lightdark,
-    );
+    return Container();
   }
 }

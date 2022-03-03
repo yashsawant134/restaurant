@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant/screens/Home.dart';
+import 'package:restaurant/screens/MenuScreen.dart';
 import 'package:restaurant/screens/TableBooking.dart';
 import 'package:restaurant/Constants/Colours.dart';
 import 'package:restaurant/screens/profile.dart';
 import 'package:restaurant/screens/wallet.dart';
+import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
+import 'package:flutter_qr_bar_scanner/qr_bar_scanner_camera.dart';
+
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -52,7 +56,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 backgroundColor: Colours.yellow,
                 child: Image.asset("assets/png/scan.png",height: 28,width: 28,),
                 elevation: 0.1,
-                onPressed: () {}),
+                onPressed: () {
+                  showQrScanScreen();
+                }),
           ),
           Container(
             height: height,
@@ -115,6 +121,44 @@ class _BottomNavBarState extends State<BottomNavBar> {
     )
   );
   }
+  void showQrScanScreen(){
+    showAdaptiveActionSheet(
+      
+      context: context,
+      title: const Text(
+        'Scan QR',
+        style: TextStyle(color: Colors.yellow),
+      ),
+      androidBorderRadius: 30,
+      bottomSheetColor: Colours.lightdark,
+      
+      actions: [
+        BottomSheetAction(
+          
+            title: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height/1.248,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 500,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(30))
+                        ),
+                        child: Second()),
+                    ],
+                  ),
+                )
+              ],
+            ),
+            onPressed: () {}),
+      ],
+    );
+}
+
 }
 
 
@@ -157,6 +201,7 @@ class BottomNavCurvePainter extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
   }
+  
 }
 
 class NavBarIcon extends StatelessWidget {
@@ -194,5 +239,60 @@ class NavBarIcon extends StatelessWidget {
         ),
       ],
     );
+    
+  }
+  
+}
+
+class Second extends StatefulWidget {
+  @override
+  _SecondState createState() => _SecondState();
+}
+class _SecondState extends State<Second> {
+  String? _qrInfo = 'Scan a QR/Bar code';
+  bool camState = false;
+  int i=0;
+  qrCallback(String? code) {
+    setState(() {
+      if(i==0)navigate();
+i++;      camState = false;
+      _qrInfo = code;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      camState = true;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+     
+      body:Center(
+              child: SizedBox(
+                height: 500,
+                width: 500,
+                
+                child: QRBarScannerCamera(
+                  onError: (context, error) => Text(
+                    error.toString(),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  qrCodeCallback: (code) {
+                    qrCallback(code);
+                  },
+                ),
+              ),
+            )
+        
+    );
+  }
+  void navigate(){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MenuScreen()));
   }
 }

@@ -1,7 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:restaurant/Constants/Colours.dart';
+import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
+import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
+import 'package:intl/intl.dart';
 
 class TableBooking extends StatefulWidget {
   TableBooking({Key? key}) : super(key: key);
@@ -9,6 +12,9 @@ class TableBooking extends StatefulWidget {
   @override
   State<TableBooking> createState() => _TpState();
 }
+
+DateTime now = DateTime.now();
+String date = DateFormat('dd MMM y').format(now);
 
 class _TpState extends State<TableBooking> {
   final _transformationController = TransformationController();
@@ -650,7 +656,6 @@ class _TpState extends State<TableBooking> {
                               ),
                             ],
                           ),
-                         
                         ],
                       ),
                     ),
@@ -746,160 +751,252 @@ class _TpState extends State<TableBooking> {
               Positioned(
                 bottom: 0,
                 child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 245,
-                        decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40), topRight: Radius.circular(40)),
-                color: Colours.lightdark,
+                  width: MediaQuery.of(context).size.width,
+                  height: 245,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40)),
+                    color: Colours.lightdark,
+                  ),
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 20, right: 20, left: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 40,
+                              height: 4,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(3))),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Text("Schedule a visit",
+                            style: GoogleFonts.davidLibre(
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold)),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: showCalendar,
+                              child: Container(
+                                width: 120,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.yellow.shade400),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20))),
+                                child: Center(
+                                  child: Text(
+                                    date,
+                                    style: GoogleFonts.davidLibre(
+                                        color: Colors.white, fontSize: 18),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 12,
+                            ),
+                            InkWell(
+                              onTap: ShowTime,
+                              child: Container(
+                                width: 110,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  color: Colors.grey[700],
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "8PM",
+                                    style: GoogleFonts.davidLibre(
+                                        color: Colors.white, fontSize: 18),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            Text("How many you are?",
+                                style: GoogleFonts.davidLibre(
+                                    color: Colors.white,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold)),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              width: 30,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.yellow.shade400),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                child: new Icon(
+                                  Icons.remove,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text("04",
+                                style: GoogleFonts.davidLibre(
+                                    color: Colors.white,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold)),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Container(
+                              width: 30,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.yellow.shade400),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                child: new Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 55,
+                          decoration: BoxDecoration(
+                              color: Colours.yellow,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          child: Center(
+                              child: Text(
+                            "Book a table",
+                            style: GoogleFonts.lato(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600),
+                          )),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                        child: Container(
-                          margin: EdgeInsets.only(bottom: 20, right: 20, left: 20),
-                          child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 40,
-                        height: 4,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(3))
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Text("Schedule a visit",
-                      style: GoogleFonts.davidLibre(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold)),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        width: 120,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.yellow.shade400),
-                            borderRadius: BorderRadius.all(Radius.circular(20))),
-                        child: Center(
-                          child: Text(
-                            "02 FEB 2022",
-                            style: GoogleFonts.davidLibre(
-                                color: Colors.white, fontSize: 18),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      Container(
-                        width: 110,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          color: Colors.grey[700],
-                        ),
-                        child: Center(
-                          child: Text(
-                            "8PM",
-                            style: GoogleFonts.davidLibre(
-                                color: Colors.white, fontSize: 18),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Text("How many you are?",
-                          style: GoogleFonts.davidLibre(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold)),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        width: 30,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.yellow.shade400),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: new Icon(
-                            Icons.remove,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text("04",
-                          style: GoogleFonts.davidLibre(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold)),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Container(
-                        width: 30,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.yellow.shade400),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: new Icon(
-                            Icons.add,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 55,
-                    decoration: BoxDecoration(
-                        color: Colours.yellow,
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Center(
-                        child: Text(
-                      "Book a table",
-                      style: GoogleFonts.lato(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600),
-                    )),
-                  ),
-                ],
-                          ),
-                        ),
-                      ),
               ),
             ],
           ),
         ),
-       ),
+      ),
+    );
+  }
+
+  void showCalendar() {
+    showAdaptiveActionSheet(
+      context: context,
+      title: const Text(
+        'Choose preferable date',
+        style: TextStyle(color: Colors.yellow),
+      ),
+      androidBorderRadius: 30,
+      bottomSheetColor: Colours.lightdark,
+      actions: [
+        BottomSheetAction(
+            title: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                DatePicker(
+                  DateTime.now(),
+                  daysCount: 10,
+                  initialSelectedDate: DateTime.now(),
+                  selectionColor: Colors.yellow,
+                  selectedTextColor: Colours.dark,
+                  
+                  onDateChange: (dat) {
+                    // New date selected
+                    setState(() {
+                      date = dat.day.toString() +
+                          " " +
+                          dat.month.toString() +
+                          " " +
+                          dat.year.toString();
+                    });
+                  },
+                ),
+              ],
+            ),
+            onPressed: () {}),
+      ],
+      cancelAction: CancelAction(
+          title: const Text(
+              'Cancel')), // onPressed parameter is optional by default will dismiss the ActionSheet
+    );
+  }
+
+  buildCustomTimer(BuildContext context) {
+    return TimePickerSpinner(
+      is24HourMode: false,
+      normalTextStyle: TextStyle(fontSize: 24, color: Colours.icon_color),
+      highlightedTextStyle: TextStyle(fontSize: 24, color: Colors.yellow),
+      spacing: 20,
+      itemHeight: 50,
+      isForce2Digits: true,
+      onTimeChange: (time) {
+        setState(() {});
+      },
+    );
+  }
+
+  void ShowTime() { 
+    showAdaptiveActionSheet(
+      context: context,
+      title: const Text(
+        'Choose preferable time',
+        style: TextStyle(color: Colors.yellow),
+      ),
+      androidBorderRadius: 30,
+      bottomSheetColor: Colours.lightdark,
+      actions: [
+        BottomSheetAction(
+            title: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[buildCustomTimer(context)],
+            ),
+            onPressed: () {}),
+      ],
+      cancelAction: CancelAction(
+          title: const Text(
+              'Cancel')), // onPressed parameter is optional by default will dismiss the ActionSheet
     );
   }
 }
