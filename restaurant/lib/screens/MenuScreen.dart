@@ -1,14 +1,32 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant/Constants/Colours.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 
+String? code_all = "";
+var today = DateFormat('EEEE').format(DateTime.now());
+
 class MenuScreen extends StatefulWidget {
-  const MenuScreen({Key? key}) : super(key: key);
+  String? code = '';
+  MenuScreen({Key? key, required this.code}) : super(key: key) {
+    code_all = this.code;
+    firebaseAppfunc();
+  }
 
   @override
   _MenuScreenState createState() => _MenuScreenState();
+}
+
+//Firebase initialization
+Future<void> firebaseAppfunc() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 }
 
 class _MenuScreenState extends State<MenuScreen> {
@@ -17,13 +35,21 @@ class _MenuScreenState extends State<MenuScreen> {
     setState(() {
       current = n;
     });
+    // Fluttertoast.showToast(
+    //   msg: "try: " + code_all!, // message
+    //   toastLength: Toast.LENGTH_SHORT, // length
+    //   gravity: ToastGravity.CENTER, // location
+    // );
   }
 
   @override
   Widget build(BuildContext context) {
+    Stream<QuerySnapshot> special =
+        FirebaseFirestore.instance.collection("today_dish").snapshots();
     return Scaffold(
       backgroundColor: Colours.lightdark,
       appBar: AppBar(
+        title: Text(code_all!),
         toolbarHeight: 65,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -108,11 +134,31 @@ class _MenuScreenState extends State<MenuScreen> {
                   child: Column(
                     children: [
                       Container(
-                          child: Image.asset(
-                        "assets/png/burgger.png",
-                        width: 190,
-                        height: 190,
-                      )),
+                          child: StreamBuilder<QuerySnapshot>(
+                              stream: special,
+                              builder: (
+                                BuildContext context,
+                                AsyncSnapshot<QuerySnapshot> snapshot,
+                              ) {
+                                if (snapshot.hasError) {
+                                  return Text('Something went wrong');
+                                }
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return Text("Loading");
+                                }
+                                final data = snapshot.requireData;
+                                Fluttertoast.showToast(
+                                  msg: "try: " +
+                                      data.docs[0]['burger'], // message
+                                  toastLength: Toast.LENGTH_SHORT, // length
+                                  gravity: ToastGravity.CENTER, // location
+                                );
+
+                                return Text(
+                                  data.docs[0]['burger'],
+                                );
+                              })),
                       SizedBox(
                         height: 10,
                       ),
@@ -685,6 +731,12 @@ class _MenuScreenState extends State<MenuScreen> {
     );
   }
 }
+
+// void showTodaySpecial() {
+
+//     ,
+//     );
+// }
 
 class CategoryModel {
   String? icon;

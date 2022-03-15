@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+//import 'package:barcode_scan/barcode_scan.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:async';
+
 import 'package:restaurant/screens/Home.dart';
 import 'package:restaurant/screens/MenuScreen.dart';
 import 'package:restaurant/screens/TableBooking.dart';
@@ -8,7 +13,6 @@ import 'package:restaurant/screens/wallet.dart';
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 import 'package:flutter_qr_bar_scanner/qr_bar_scanner_camera.dart';
 
-
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
 
@@ -16,21 +20,14 @@ class BottomNavBar extends StatefulWidget {
   _BottomNavBarState createState() => _BottomNavBarState();
 }
 
-int pageIndex =0;
+int pageIndex = 0;
 
-final ScreenPages = [
-  HomeScreen(),
-  TableBooking(),
-  Wallet(),
-  Profile()
-];
+final ScreenPages = [HomeScreen(), TableBooking(), Wallet(), Profile()];
 
 class _BottomNavBarState extends State<BottomNavBar> {
-
   @override
   Widget build(BuildContext context) {
-
-       Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
     double height = 56;
 
     final primaryColor = Colours.yellow;
@@ -41,89 +38,93 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return Scaffold(
         backgroundColor: Colours.lightdark,
         body: ScreenPages[pageIndex],
-        bottomNavigationBar:BottomAppBar(
-      color: Colors.transparent,
-      elevation: 0,
-      child: Stack(
-        children: [
-          CustomPaint(
-            size: Size(size.width, height + 6),
-            painter: BottomNavCurvePainter(backgroundColor: backgroundColor),
-          ),
-          Center(
-            heightFactor: 0.6,
-            child: FloatingActionButton(
-                backgroundColor: Colours.yellow,
-                child: Image.asset("assets/png/scan.png",height: 28,width: 28,),
-                elevation: 0.1,
-                onPressed: () {
-                  showQrScanScreen();
-                }),
-          ),
-          Container(
-            height: height,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                NavBarIcon(
-                  text: "Home",
-                  icon: "assets/png/foodtray.png",
-                  selected: pageIndex == 0,
-                  onPressed: () {
-                    setState(() {
-                      pageIndex = 0;
-                    });
-                  },
-                  defaultColor: secondaryColor,
-                  selectedColor: primaryColor,
-                ),
-                NavBarIcon(
-                  text: "Search",
-                  icon: "assets/png/dinnertable.png",
-                  selected: pageIndex == 1,
-                  onPressed: () {
-                    setState(() {
-                      pageIndex = 1;
-                    });
-                  },
-                  defaultColor: secondaryColor,
-                  selectedColor: primaryColor,
-                ),
-                SizedBox(width: 56),
-                NavBarIcon(
-                    text: "Cart",
-                    icon: "assets/png/wallet.png",
-                    selected: pageIndex == 2,
+        bottomNavigationBar: BottomAppBar(
+          color: Colors.transparent,
+          elevation: 0,
+          child: Stack(
+            children: [
+              CustomPaint(
+                size: Size(size.width, height + 6),
+                painter:
+                    BottomNavCurvePainter(backgroundColor: backgroundColor),
+              ),
+              Center(
+                heightFactor: 0.6,
+                child: FloatingActionButton(
+                    backgroundColor: Colours.yellow,
+                    child: Image.asset(
+                      "assets/png/scan.png",
+                      height: 28,
+                      width: 28,
+                    ),
+                    elevation: 0.1,
                     onPressed: () {
-                      setState(() {
-                        pageIndex = 2;
-                      });
-                    },
-                    defaultColor: secondaryColor,
-                    selectedColor: primaryColor),
-                NavBarIcon(
-                  text: "Calendar",
-                  icon: "assets/png/avatar.png",
-                  selected: pageIndex == 3,
-                  onPressed: () {
-                    setState(() {
-                      pageIndex = 3;
-                    });
-                  },
-                  selectedColor: primaryColor,
-                  defaultColor: secondaryColor,
-                )
-              ],
-            ),
+                      showQrScanScreen();
+                    }),
+              ),
+              Container(
+                height: height,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    NavBarIcon(
+                      text: "Home",
+                      icon: "assets/png/foodtray.png",
+                      selected: pageIndex == 0,
+                      onPressed: () {
+                        setState(() {
+                          pageIndex = 0;
+                        });
+                      },
+                      defaultColor: secondaryColor,
+                      selectedColor: primaryColor,
+                    ),
+                    NavBarIcon(
+                      text: "Search",
+                      icon: "assets/png/dinnertable.png",
+                      selected: pageIndex == 1,
+                      onPressed: () {
+                        setState(() {
+                          pageIndex = 1;
+                        });
+                      },
+                      defaultColor: secondaryColor,
+                      selectedColor: primaryColor,
+                    ),
+                    SizedBox(width: 56),
+                    NavBarIcon(
+                        text: "Cart",
+                        icon: "assets/png/wallet.png",
+                        selected: pageIndex == 2,
+                        onPressed: () {
+                          setState(() {
+                            pageIndex = 2;
+                          });
+                        },
+                        defaultColor: secondaryColor,
+                        selectedColor: primaryColor),
+                    NavBarIcon(
+                      text: "Calendar",
+                      icon: "assets/png/avatar.png",
+                      selected: pageIndex == 3,
+                      onPressed: () {
+                        setState(() {
+                          pageIndex = 3;
+                        });
+                      },
+                      selectedColor: primaryColor,
+                      defaultColor: secondaryColor,
+                    )
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    )
-  );
+        ));
   }
-  void showQrScanScreen(){
+
+  void showQrScanScreen() {
     showAdaptiveActionSheet(
-      
       context: context,
       title: const Text(
         'Scan QR',
@@ -131,24 +132,22 @@ class _BottomNavBarState extends State<BottomNavBar> {
       ),
       androidBorderRadius: 30,
       bottomSheetColor: Colours.lightdark,
-      
       actions: [
         BottomSheetAction(
-          
             title: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height/1.248,
+                  height: MediaQuery.of(context).size.height / 1.248,
                   child: Column(
                     children: [
                       Container(
-                        height: 500,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(30))
-                        ),
-                        child: Second()),
+                          height: 500,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30))),
+                          child: Second()),
                     ],
                   ),
                 )
@@ -157,10 +156,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
             onPressed: () {}),
       ],
     );
+  }
 }
-
-}
-
 
 class BottomNavCurvePainter extends CustomPainter {
   BottomNavCurvePainter(
@@ -201,7 +198,6 @@ class BottomNavCurvePainter extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
   }
-  
 }
 
 class NavBarIcon extends StatelessWidget {
@@ -239,23 +235,23 @@ class NavBarIcon extends StatelessWidget {
         ),
       ],
     );
-    
   }
-  
 }
 
 class Second extends StatefulWidget {
   @override
   _SecondState createState() => _SecondState();
 }
+
 class _SecondState extends State<Second> {
   String? _qrInfo = 'Scan a QR/Bar code';
   bool camState = false;
-  int i=0;
+  int i = 0;
   qrCallback(String? code) {
     setState(() {
-      if(i==0)navigate();
-i++;      camState = false;
+      if (i == 0) navigate(code);
+      i++;
+      camState = false;
       _qrInfo = code;
     });
   }
@@ -271,28 +267,26 @@ i++;      camState = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
-      body:Center(
-              child: SizedBox(
-                height: 500,
-                width: 500,
-                
-                child: QRBarScannerCamera(
-                  onError: (context, error) => Text(
-                    error.toString(),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.red),
-                  ),
-                  qrCodeCallback: (code) {
-                    qrCallback(code);
-                  },
-                ),
-              ),
-            )
-        
-    );
+        body: Center(
+      child: SizedBox(
+        height: 500,
+        width: 500,
+        child: QRBarScannerCamera(
+          onError: (context, error) => Text(
+            error.toString(),
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.red),
+          ),
+          qrCodeCallback: (code) {
+            qrCallback(code);
+          },
+        ),
+      ),
+    ));
   }
-  void navigate(){
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MenuScreen()));
+
+  void navigate(String? code) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => MenuScreen(code: code)));
   }
 }
