@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 //import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
@@ -13,8 +14,14 @@ import 'package:restaurant/screens/wallet.dart';
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 import 'package:flutter_qr_bar_scanner/qr_bar_scanner_camera.dart';
 
+Stream<QuerySnapshot<Object?>> special_all = Stream.empty();
+
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({Key? key}) : super(key: key);
+  Stream<QuerySnapshot<Object?>> special = Stream.empty();
+
+  BottomNavBar(this.special, {Key? key}) : super(key: key) {
+    special_all = this.special;
+  }
 
   @override
   _BottomNavBarState createState() => _BottomNavBarState();
@@ -286,7 +293,7 @@ class _SecondState extends State<Second> {
   }
 
   void navigate(String? code) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => MenuScreen(code: code)));
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => MenuScreen(code: code, special: special_all)));
   }
 }

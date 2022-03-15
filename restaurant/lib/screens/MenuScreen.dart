@@ -10,13 +10,28 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 
 String? code_all = "";
-var today = DateFormat('EEEE').format(DateTime.now());
+var weekday = [
+  'Monday',
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday"
+];
+
+var today = DateFormat('EEEE').format(DateTime.now()); //Tuesday
+Stream<QuerySnapshot<Object?>> special_all = Stream.empty();
 
 class MenuScreen extends StatefulWidget {
   String? code = '';
-  MenuScreen({Key? key, required this.code}) : super(key: key) {
+  Stream<QuerySnapshot<Object?>> special = Stream.empty();
+
+  MenuScreen({Key? key, required this.code, required this.special})
+      : super(key: key) {
     code_all = this.code;
-    firebaseAppfunc();
+    special_all = this.special;
+    //firebaseAppfunc();
   }
 
   @override
@@ -24,10 +39,10 @@ class MenuScreen extends StatefulWidget {
 }
 
 //Firebase initialization
-Future<void> firebaseAppfunc() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-}
+// Future<void> firebaseAppfunc() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp();
+// }
 
 class _MenuScreenState extends State<MenuScreen> {
   int current = 0;
@@ -42,10 +57,11 @@ class _MenuScreenState extends State<MenuScreen> {
     // );
   }
 
+  final Stream<QuerySnapshot> special =
+      FirebaseFirestore.instance.collection("today_dish").snapshots();
+  String today_dish_name = "";
   @override
   Widget build(BuildContext context) {
-    Stream<QuerySnapshot> special =
-        FirebaseFirestore.instance.collection("today_dish").snapshots();
     return Scaffold(
       backgroundColor: Colours.lightdark,
       appBar: AppBar(
@@ -135,7 +151,8 @@ class _MenuScreenState extends State<MenuScreen> {
                     children: [
                       Container(
                           child: StreamBuilder<QuerySnapshot>(
-                              stream: special,
+                              stream:
+                                  special_all, //FirebaseFirestore.instance.collection("today_dish"),
                               builder: (
                                 BuildContext context,
                                 AsyncSnapshot<QuerySnapshot> snapshot,
@@ -143,21 +160,50 @@ class _MenuScreenState extends State<MenuScreen> {
                                 if (snapshot.hasError) {
                                   return Text('Something went wrong');
                                 }
+                                final data = snapshot.data!.docs;
+                                int todayIndex = weekday.indexOf(today);
+                                today_dish_name = data[todayIndex]['name'];
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
                                   return Text("Loading");
+                                } else {
+                                  String img="";
+                                  for(int i=0;i<data.length;i++){
+                                    if(data[i].id==today){
+                                        img=data[i]['imgURL'];
+                                    }
+                                  }
+                                  Fluttertoast.showToast(
+                                    msg: "try: " +
+                                        today_dish_name +
+                                        " " +
+                                        todayIndex.toString(), // message
+                                    toastLength: Toast.LENGTH_SHORT, // length
+                                    gravity: ToastGravity.CENTER, // location
+                                  );
+                                  return Image.network(
+                                    img,
+                                    width: 190,
+                                    height: 190,
+                                  );
                                 }
-                                final data = snapshot.requireData;
-                                Fluttertoast.showToast(
-                                  msg: "try: " +
-                                      data.docs[0]['burger'], // message
-                                  toastLength: Toast.LENGTH_SHORT, // length
-                                  gravity: ToastGravity.CENTER, // location
-                                );
-
-                                return Text(
-                                  data.docs[0]['burger'],
-                                );
+                                // for (int i = 0; i < weekday.length; i++) {
+                                //   if (weekday[i] == today) {
+                                //     Fluttertoast.showToast(
+                                //       msg: "try: " +
+                                //           today_dish_name +
+                                //           " : " +
+                                //           weekday[i], // message
+                                //       toastLength: Toast.LENGTH_SHORT, // length
+                                //       gravity: ToastGravity.CENTER, // location
+                                //     );
+                                //     return Image.network(
+                                //       data.docs[i]['imgURL'],
+                                //       width: 190,
+                                //       height: 190,
+                                //     );
+                                //   }
+                                // }
                               })),
                       SizedBox(
                         height: 10,
@@ -168,7 +214,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Crispy aloo patty",
+                              today_dish_name,
                               style: GoogleFonts.davidLibre(
                                   fontSize: 21,
                                   color: Colors.black,
