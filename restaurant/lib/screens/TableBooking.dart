@@ -15,6 +15,7 @@ class TableBooking extends StatefulWidget {
 
 DateTime now = DateTime.now();
 String date = DateFormat('dd MMM y').format(now);
+String selectedTableId = "T3";
 
 class _TpState extends State<TableBooking> {
   final _transformationController = TransformationController();
@@ -59,64 +60,706 @@ class _TpState extends State<TableBooking> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Column(
-                                children: [
-                                  Image.asset(
-                                    "assets/png/yellow_chair.png",
-                                    width: 24,
-                                    height: 24,
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      RotationTransition(
-                                          turns: new AlwaysStoppedAnimation(
-                                              270 / 360),
-                                          child: Image.asset(
-                                            "assets/png/yellow_chair.png",
-                                            width: 24,
-                                            height: 24,
-                                          )),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      ClipOval(
-                                        child: Container(
-                                          width: 50,
-                                          height: 30,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xff403d3d),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    selectedTableId = "T1";
+                                  });
+                                },
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId == "T1"
+                                                ? Colours.yellow
+                                                    .withOpacity(0.3)
+                                                : Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      RotationTransition(
-                                          turns: new AlwaysStoppedAnimation(
-                                              90 / 360),
-                                          child: Image.asset(
-                                            "assets/png/yellow_chair.png",
-                                            width: 24,
-                                            height: 24,
-                                          )),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  RotationTransition(
-                                      turns:
-                                          new AlwaysStoppedAnimation(180 / 360),
                                       child: Image.asset(
                                         "assets/png/yellow_chair.png",
                                         width: 24,
                                         height: 24,
-                                      )),
-                                ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        RotationTransition(
+                                          turns: new AlwaysStoppedAnimation(
+                                              270 / 360),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: selectedTableId == "T1"
+                                                      ? Colours.yellow
+                                                          .withOpacity(0.3)
+                                                      : Colors.transparent,
+                                                  spreadRadius: 1,
+                                                  blurRadius: 1,
+                                                  // changes position of shadow
+                                                ),
+                                              ],
+                                            ),
+                                            child: Image.asset(
+                                              "assets/png/yellow_chair.png",
+                                              width: 24,
+                                              height: 24,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        ClipOval(
+                                          child: Container(
+                                            width: 50,
+                                            height: 30,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xff403d3d),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        RotationTransition(
+                                          turns: new AlwaysStoppedAnimation(
+                                              90 / 360),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: selectedTableId == "T1"
+                                                      ? Colours.yellow
+                                                          .withOpacity(0.3)
+                                                      : Colors.transparent,
+                                                  spreadRadius: 1,
+                                                  blurRadius: 1,
+                                                  // changes position of shadow
+                                                ),
+                                              ],
+                                            ),
+                                            child: Image.asset(
+                                              "assets/png/yellow_chair.png",
+                                              width: 24,
+                                              height: 24,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    RotationTransition(
+                                      turns:
+                                          new AlwaysStoppedAnimation(180 / 360),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: selectedTableId == "T1"
+                                                  ? Colours.yellow
+                                                      .withOpacity(0.3)
+                                                  : Colors.transparent,
+                                              spreadRadius: 1,
+                                              blurRadius: 1,
+                                              // changes position of shadow
+                                            ),
+                                          ],
+                                        ),
+                                        child: Image.asset(
+                                          "assets/png/yellow_chair.png",
+                                          width: 24,
+                                          height: 24,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          //----------------------------------Row 1 end ------------------------------------//
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 30,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    selectedTableId = "T2";
+                                  });
+                                },
+                                child: RotationTransition(
+                                  turns: new AlwaysStoppedAnimation(135 / 360),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: selectedTableId == "T2"
+                                                  ? Colours.yellow
+                                                      .withOpacity(0.3)
+                                                  : Colors.transparent,
+                                              spreadRadius: 1,
+                                              blurRadius: 1,
+                                              // changes position of shadow
+                                            ),
+                                          ],
+                                        ),
+                                        child: Image.asset(
+                                          "assets/png/yellow_chair.png",
+                                          width: 24,
+                                          height: 24,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          RotationTransition(
+                                            turns: new AlwaysStoppedAnimation(
+                                                270 / 360),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: selectedTableId ==
+                                                            "T2"
+                                                        ? Colours.yellow
+                                                            .withOpacity(0.3)
+                                                        : Colors.transparent,
+                                                    spreadRadius: 1,
+                                                    blurRadius: 1,
+                                                    // changes position of shadow
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: selectedTableId ==
+                                                              "T2"
+                                                          ? Colours.yellow
+                                                              .withOpacity(0.3)
+                                                          : Colors.transparent,
+                                                      spreadRadius: 1,
+                                                      blurRadius: 1,
+                                                      // changes position of shadow
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: Image.asset(
+                                                  "assets/png/yellow_chair.png",
+                                                  width: 24,
+                                                  height: 24,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          ClipOval(
+                                            child: Container(
+                                              width: 50,
+                                              height: 30,
+                                              decoration: BoxDecoration(
+                                                color: Color(0xff403d3d),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          RotationTransition(
+                                            turns: new AlwaysStoppedAnimation(
+                                                90 / 360),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: selectedTableId ==
+                                                            "T2"
+                                                        ? Colours.yellow
+                                                            .withOpacity(0.3)
+                                                        : Colors.transparent,
+                                                    spreadRadius: 1,
+                                                    blurRadius: 1,
+                                                    // changes position of shadow
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Image.asset(
+                                                "assets/png/yellow_chair.png",
+                                                width: 24,
+                                                height: 24,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      RotationTransition(
+                                        turns: new AlwaysStoppedAnimation(
+                                            180 / 360),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: selectedTableId == "T2"
+                                                    ? Colours.yellow
+                                                        .withOpacity(0.3)
+                                                    : Colors.transparent,
+                                                spreadRadius: 1,
+                                                blurRadius: 1,
+                                                // changes position of shadow
+                                              ),
+                                            ],
+                                          ),
+                                          child: Image.asset(
+                                            "assets/png/yellow_chair.png",
+                                            width: 24,
+                                            height: 24,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    selectedTableId = "T3";
+                                  });
+                                },
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId == "T3"
+                                                ? Colours.yellow
+                                                    .withOpacity(0.3)
+                                                : Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Image.asset(
+                                        "assets/png/black_chair.png",
+                                        width: 24,
+                                        height: 24,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        RotationTransition(
+                                          turns: new AlwaysStoppedAnimation(
+                                              270 / 360),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: selectedTableId == "T3"
+                                                      ? Colours.yellow
+                                                          .withOpacity(0.3)
+                                                      : Colors.transparent,
+                                                  spreadRadius: 1,
+                                                  blurRadius: 1,
+                                                  // changes position of shadow
+                                                ),
+                                              ],
+                                            ),
+                                            child: Image.asset(
+                                              "assets/png/black_chair.png",
+                                              width: 24,
+                                              height: 24,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        ClipOval(
+                                          child: Container(
+                                            width: 50,
+                                            height: 30,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xff403d3d),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        RotationTransition(
+                                          turns: new AlwaysStoppedAnimation(
+                                              90 / 360),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: selectedTableId == "T3"
+                                                      ? Colours.yellow
+                                                          .withOpacity(0.3)
+                                                      : Colors.transparent,
+                                                  spreadRadius: 1,
+                                                  blurRadius: 1,
+                                                  // changes position of shadow
+                                                ),
+                                              ],
+                                            ),
+                                            child: Image.asset(
+                                              "assets/png/black_chair.png",
+                                              width: 24,
+                                              height: 24,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    RotationTransition(
+                                      turns:
+                                          new AlwaysStoppedAnimation(180 / 360),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: selectedTableId == "T3"
+                                                  ? Colours.yellow
+                                                      .withOpacity(0.3)
+                                                  : Colors.transparent,
+                                              spreadRadius: 1,
+                                              blurRadius: 1,
+                                              // changes position of shadow
+                                            ),
+                                          ],
+                                        ),
+                                        child: Image.asset(
+                                          "assets/png/black_chair.png",
+                                          width: 24,
+                                          height: 24,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    selectedTableId = "T4";
+                                  });
+                                },
+                                child: RotationTransition(
+                                  turns: new AlwaysStoppedAnimation(45 / 360),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: selectedTableId == "T4"
+                                                  ? Colours.yellow
+                                                      .withOpacity(0.3)
+                                                  : Colors.transparent,
+                                              spreadRadius: 1,
+                                              blurRadius: 1,
+                                              // changes position of shadow
+                                            ),
+                                          ],
+                                        ),
+                                        child: Image.asset(
+                                          "assets/png/black_chair.png",
+                                          width: 24,
+                                          height: 24,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          RotationTransition(
+                                            turns: new AlwaysStoppedAnimation(
+                                                270 / 360),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: selectedTableId ==
+                                                            "T4"
+                                                        ? Colours.yellow
+                                                            .withOpacity(0.3)
+                                                        : Colors.transparent,
+                                                    spreadRadius: 1,
+                                                    blurRadius: 1,
+                                                    // changes position of shadow
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Image.asset(
+                                                "assets/png/black_chair.png",
+                                                width: 24,
+                                                height: 24,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          ClipOval(
+                                            child: Container(
+                                              width: 50,
+                                              height: 30,
+                                              decoration: BoxDecoration(
+                                                color: Color(0xff403d3d),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          RotationTransition(
+                                            turns: new AlwaysStoppedAnimation(
+                                                90 / 360),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: selectedTableId ==
+                                                            "T4"
+                                                        ? Colours.yellow
+                                                            .withOpacity(0.3)
+                                                        : Colors.transparent,
+                                                    spreadRadius: 1,
+                                                    blurRadius: 1,
+                                                    // changes position of shadow
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Image.asset(
+                                                "assets/png/black_chair.png",
+                                                width: 24,
+                                                height: 24,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      RotationTransition(
+                                        turns: new AlwaysStoppedAnimation(
+                                            180 / 360),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: selectedTableId == "T4"
+                                                    ? Colours.yellow
+                                                        .withOpacity(0.3)
+                                                    : Colors.transparent,
+                                                spreadRadius: 1,
+                                                blurRadius: 1,
+                                                // changes position of shadow
+                                              ),
+                                            ],
+                                          ),
+                                          child: Image.asset(
+                                            "assets/png/black_chair.png",
+                                            width: 24,
+                                            height: 24,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  
+                                  setState(() {
+                                    selectedTableId="T5";
+                                  });
+                                },
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId == "T5"
+                                                ? Colours.yellow.withOpacity(0.3)
+                                                : Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Image.asset(
+                                        "assets/png/yellow_chair.png",
+                                        width: 24,
+                                        height: 24,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        RotationTransition(
+                                          turns: new AlwaysStoppedAnimation(
+                                              270 / 360),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: selectedTableId == "T5"
+                                                      ? Colours.yellow
+                                                          .withOpacity(0.3)
+                                                      : Colors.transparent,
+                                                  spreadRadius: 1,
+                                                  blurRadius: 1,
+                                                  // changes position of shadow
+                                                ),
+                                              ],
+                                            ),
+                                            child: Image.asset(
+                                              "assets/png/yellow_chair.png",
+                                              width: 24,
+                                              height: 24,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        ClipOval(
+                                          child: Container(
+                                            width: 50,
+                                            height: 30,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xff403d3d),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        RotationTransition(
+                                          turns: new AlwaysStoppedAnimation(
+                                              90 / 360),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: selectedTableId == "T5"
+                                                      ? Colours.yellow
+                                                          .withOpacity(0.3)
+                                                      : Colors.transparent,
+                                                  spreadRadius: 1,
+                                                  blurRadius: 1,
+                                                  // changes position of shadow
+                                                ),
+                                              ],
+                                            ),
+                                            child: Image.asset(
+                                              "assets/png/yellow_chair.png",
+                                              width: 24,
+                                              height: 24,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    RotationTransition(
+                                      turns:
+                                          new AlwaysStoppedAnimation(180 / 360),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: selectedTableId == "T5"
+                                                  ? Colours.yellow
+                                                      .withOpacity(0.3)
+                                                  : Colors.transparent,
+                                              spreadRadius: 1,
+                                              blurRadius: 1,
+                                              // changes position of shadow
+                                            ),
+                                          ],
+                                        ),
+                                        child: Image.asset(
+                                          "assets/png/yellow_chair.png",
+                                          width: 24,
+                                          height: 24,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -128,30 +771,178 @@ class _TpState extends State<TableBooking> {
                               SizedBox(
                                 width: 30,
                               ),
-                              RotationTransition(
-                                turns: new AlwaysStoppedAnimation(135 / 360),
+                              InkWell(
+                                onTap:(){
+                                  setState((){
+                                      selectedTableId="T6";
+                                  });
+                                },
+                                child: RotationTransition(
+                                  turns: new AlwaysStoppedAnimation(135 / 360),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId=="T6"? Colours.yellow.withOpacity(0.3): Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Image.asset(
+                                        "assets/png/black_chair.png",
+                                        width: 24,
+                                        height: 24,
+                                      ),
+                                    ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          RotationTransition(
+                                              turns: new AlwaysStoppedAnimation(
+                                                  270 / 360),
+                                              child: Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId=="T6"? Colours.yellow.withOpacity(0.3): Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Image.asset(
+                                        "assets/png/black_chair.png",
+                                        width: 24,
+                                        height: 24,
+                                      ),
+                                    ),),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          ClipOval(
+                                            child: Container(
+                                              width: 50,
+                                              height: 30,
+                                              decoration: BoxDecoration(
+                                                color: Color(0xff403d3d),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          RotationTransition(
+                                              turns: new AlwaysStoppedAnimation(
+                                                  90 / 360),
+                                              child: Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId=="T6"? Colours.yellow.withOpacity(0.3): Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Image.asset(
+                                        "assets/png/black_chair.png",
+                                        width: 24,
+                                        height: 24,
+                                      ),
+                                    ),),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      RotationTransition(
+                                          turns: new AlwaysStoppedAnimation(
+                                              180 / 360),
+                                          child: Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId=="T6"? Colours.yellow.withOpacity(0.3): Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Image.asset(
+                                        "assets/png/black_chair.png",
+                                        width: 24,
+                                        height: 24,
+                                      ),
+                                    ),),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              InkWell(
+                                onTap: (){
+                                  setState(() {
+                                    selectedTableId="T7";
+                                  });
+                                },
                                 child: Column(
                                   children: [
-                                    Image.asset(
-                                      "assets/png/yellow_chair.png",
-                                      width: 24,
-                                      height: 24,
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId=="T7"? Colours.yellow.withOpacity(0.3): Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Image.asset(
+                                        "assets/png/black_chair.png",
+                                        width: 24,
+                                        height: 24,
+                                      ),
                                     ),
                                     SizedBox(
                                       height: 5,
                                     ),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         RotationTransition(
                                             turns: new AlwaysStoppedAnimation(
                                                 270 / 360),
-                                            child: Image.asset(
-                                              "assets/png/yellow_chair.png",
-                                              width: 24,
-                                              height: 24,
-                                            )),
+                                            child: Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId=="T7"? Colours.yellow.withOpacity(0.3): Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Image.asset(
+                                        "assets/png/black_chair.png",
+                                        width: 24,
+                                        height: 24,
+                                      ),
+                                    ),),
                                         SizedBox(
                                           width: 5,
                                         ),
@@ -170,153 +961,170 @@ class _TpState extends State<TableBooking> {
                                         RotationTransition(
                                             turns: new AlwaysStoppedAnimation(
                                                 90 / 360),
-                                            child: Image.asset(
-                                              "assets/png/yellow_chair.png",
-                                              width: 24,
-                                              height: 24,
-                                            )),
+                                            child: Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId=="T7"? Colours.yellow.withOpacity(0.3): Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Image.asset(
+                                        "assets/png/black_chair.png",
+                                        width: 24,
+                                        height: 24,
+                                      ),
+                                    ),),
                                       ],
                                     ),
                                     SizedBox(
                                       height: 5,
                                     ),
                                     RotationTransition(
-                                        turns: new AlwaysStoppedAnimation(
-                                            180 / 360),
-                                        child: Image.asset(
-                                          "assets/png/yellow_chair.png",
-                                          width: 24,
-                                          height: 24,
-                                        )),
+                                        turns:
+                                            new AlwaysStoppedAnimation(180 / 360),
+                                        child: Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId=="T7"? Colours.yellow.withOpacity(0.3): Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Image.asset(
+                                        "assets/png/black_chair.png",
+                                        width: 24,
+                                        height: 24,
+                                      ),
+                                    ),),
                                   ],
                                 ),
                               ),
                               SizedBox(
                                 width: 15,
                               ),
-                              Column(
-                                children: [
-                                  Image.asset(
-                                    "assets/png/black_chair.png",
-                                    width: 24,
-                                    height: 24,
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                              InkWell(
+                                onTap: (){
+                                  setState(() {
+                                    selectedTableId="T8";
+                                  });
+                                },
+                                child: RotationTransition(
+                                  turns: new AlwaysStoppedAnimation(45 / 360),
+                                  child: Column(
                                     children: [
-                                      RotationTransition(
-                                          turns: new AlwaysStoppedAnimation(
-                                              270 / 360),
-                                          child: Image.asset(
-                                            "assets/png/black_chair.png",
-                                            width: 24,
-                                            height: 24,
-                                          )),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      ClipOval(
-                                        child: Container(
-                                          width: 50,
-                                          height: 30,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xff403d3d),
+                                      Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId=="T8"? Colours.yellow.withOpacity(0.3): Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      RotationTransition(
-                                          turns: new AlwaysStoppedAnimation(
-                                              90 / 360),
-                                          child: Image.asset(
-                                            "assets/png/black_chair.png",
-                                            width: 24,
-                                            height: 24,
-                                          )),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  RotationTransition(
-                                      turns:
-                                          new AlwaysStoppedAnimation(180 / 360),
                                       child: Image.asset(
-                                        "assets/png/black_chair.png",
+                                        "assets/png/yellow_chair.png",
                                         width: 24,
                                         height: 24,
-                                      )),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              RotationTransition(
-                                turns: new AlwaysStoppedAnimation(45 / 360),
-                                child: Column(
-                                  children: [
-                                    Image.asset(
-                                      "assets/png/black_chair.png",
-                                      width: 24,
-                                      height: 24,
+                                      ),
                                     ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        RotationTransition(
-                                            turns: new AlwaysStoppedAnimation(
-                                                270 / 360),
-                                            child: Image.asset(
-                                              "assets/png/black_chair.png",
-                                              width: 24,
-                                              height: 24,
-                                            )),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        ClipOval(
-                                          child: Container(
-                                            width: 50,
-                                            height: 30,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xff403d3d),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          RotationTransition(
+                                              turns: new AlwaysStoppedAnimation(
+                                                  270 / 360),
+                                              child: Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId=="T8"? Colours.yellow.withOpacity(0.3): Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Image.asset(
+                                        "assets/png/yellow_chair.png",
+                                        width: 24,
+                                        height: 24,
+                                      ),
+                                    ),),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          ClipOval(
+                                            child: Container(
+                                              width: 50,
+                                              height: 30,
+                                              decoration: BoxDecoration(
+                                                color: Color(0xff403d3d),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        RotationTransition(
-                                            turns: new AlwaysStoppedAnimation(
-                                                90 / 360),
-                                            child: Image.asset(
-                                              "assets/png/black_chair.png",
-                                              width: 24,
-                                              height: 24,
-                                            )),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    RotationTransition(
-                                        turns: new AlwaysStoppedAnimation(
-                                            180 / 360),
-                                        child: Image.asset(
-                                          "assets/png/black_chair.png",
-                                          width: 24,
-                                          height: 24,
-                                        )),
-                                  ],
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          RotationTransition(
+                                              turns: new AlwaysStoppedAnimation(
+                                                  90 / 360),
+                                              child: Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId=="T8"? Colours.yellow.withOpacity(0.3): Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Image.asset(
+                                        "assets/png/yellow_chair.png",
+                                        width: 24,
+                                        height: 24,
+                                      ),
+                                    ),),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      RotationTransition(
+                                          turns: new AlwaysStoppedAnimation(
+                                              180 / 360),
+                                          child: Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId=="T8"? Colours.yellow.withOpacity(0.3): Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Image.asset(
+                                        "assets/png/yellow_chair.png",
+                                        width: 24,
+                                        height: 24,
+                                      ),
+                                    ),),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -327,99 +1135,57 @@ class _TpState extends State<TableBooking> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Column(
-                                children: [
-                                  Image.asset(
-                                    "assets/png/yellow_chair.png",
-                                    width: 24,
-                                    height: 24,
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      RotationTransition(
-                                          turns: new AlwaysStoppedAnimation(
-                                              270 / 360),
-                                          child: Image.asset(
-                                            "assets/png/yellow_chair.png",
-                                            width: 24,
-                                            height: 24,
-                                          )),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      ClipOval(
-                                        child: Container(
-                                          width: 50,
-                                          height: 30,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xff403d3d),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    selectedTableId="T9";
+                                  });
+                                },
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId=="T9"? Colours.yellow.withOpacity(0.3): Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      RotationTransition(
-                                          turns: new AlwaysStoppedAnimation(
-                                              90 / 360),
-                                          child: Image.asset(
-                                            "assets/png/yellow_chair.png",
-                                            width: 24,
-                                            height: 24,
-                                          )),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  RotationTransition(
-                                      turns:
-                                          new AlwaysStoppedAnimation(180 / 360),
                                       child: Image.asset(
                                         "assets/png/yellow_chair.png",
                                         width: 24,
                                         height: 24,
-                                      )),
-                                ],
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 30,
-                              ),
-                              RotationTransition(
-                                turns: new AlwaysStoppedAnimation(135 / 360),
-                                child: Column(
-                                  children: [
-                                    Image.asset(
-                                      "assets/png/black_chair.png",
-                                      width: 24,
-                                      height: 24,
+                                      ),
                                     ),
                                     SizedBox(
                                       height: 5,
                                     ),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         RotationTransition(
                                             turns: new AlwaysStoppedAnimation(
                                                 270 / 360),
-                                            child: Image.asset(
-                                              "assets/png/black_chair.png",
-                                              width: 24,
-                                              height: 24,
-                                            )),
+                                            child: Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId=="T9"? Colours.yellow.withOpacity(0.3): Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Image.asset(
+                                        "assets/png/yellow_chair.png",
+                                        width: 24,
+                                        height: 24,
+                                      ),
+                                    ),),
                                         SizedBox(
                                           width: 5,
                                         ),
@@ -438,221 +1204,50 @@ class _TpState extends State<TableBooking> {
                                         RotationTransition(
                                             turns: new AlwaysStoppedAnimation(
                                                 90 / 360),
-                                            child: Image.asset(
-                                              "assets/png/black_chair.png",
-                                              width: 24,
-                                              height: 24,
-                                            )),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    RotationTransition(
-                                        turns: new AlwaysStoppedAnimation(
-                                            180 / 360),
-                                        child: Image.asset(
-                                          "assets/png/black_chair.png",
-                                          width: 24,
-                                          height: 24,
-                                        )),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Column(
-                                children: [
-                                  Image.asset(
-                                    "assets/png/black_chair.png",
-                                    width: 24,
-                                    height: 24,
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      RotationTransition(
-                                          turns: new AlwaysStoppedAnimation(
-                                              270 / 360),
-                                          child: Image.asset(
-                                            "assets/png/black_chair.png",
-                                            width: 24,
-                                            height: 24,
-                                          )),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      ClipOval(
-                                        child: Container(
-                                          width: 50,
-                                          height: 30,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xff403d3d),
+                                            child: Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId=="T9"? Colours.yellow.withOpacity(0.3): Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      RotationTransition(
-                                          turns: new AlwaysStoppedAnimation(
-                                              90 / 360),
-                                          child: Image.asset(
-                                            "assets/png/black_chair.png",
-                                            width: 24,
-                                            height: 24,
-                                          )),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  RotationTransition(
-                                      turns:
-                                          new AlwaysStoppedAnimation(180 / 360),
-                                      child: Image.asset(
-                                        "assets/png/black_chair.png",
-                                        width: 24,
-                                        height: 24,
-                                      )),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              RotationTransition(
-                                turns: new AlwaysStoppedAnimation(45 / 360),
-                                child: Column(
-                                  children: [
-                                    Image.asset(
-                                      "assets/png/yellow_chair.png",
-                                      width: 24,
-                                      height: 24,
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        RotationTransition(
-                                            turns: new AlwaysStoppedAnimation(
-                                                270 / 360),
-                                            child: Image.asset(
-                                              "assets/png/yellow_chair.png",
-                                              width: 24,
-                                              height: 24,
-                                            )),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        ClipOval(
-                                          child: Container(
-                                            width: 50,
-                                            height: 30,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xff403d3d),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        RotationTransition(
-                                            turns: new AlwaysStoppedAnimation(
-                                                90 / 360),
-                                            child: Image.asset(
-                                              "assets/png/yellow_chair.png",
-                                              width: 24,
-                                              height: 24,
-                                            )),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    RotationTransition(
-                                        turns: new AlwaysStoppedAnimation(
-                                            180 / 360),
-                                        child: Image.asset(
-                                          "assets/png/yellow_chair.png",
-                                          width: 24,
-                                          height: 24,
-                                        )),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Column(
-                                children: [
-                                  Image.asset(
-                                    "assets/png/yellow_chair.png",
-                                    width: 24,
-                                    height: 24,
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      RotationTransition(
-                                          turns: new AlwaysStoppedAnimation(
-                                              270 / 360),
-                                          child: Image.asset(
-                                            "assets/png/yellow_chair.png",
-                                            width: 24,
-                                            height: 24,
-                                          )),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      ClipOval(
-                                        child: Container(
-                                          width: 50,
-                                          height: 30,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xff403d3d),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      RotationTransition(
-                                          turns: new AlwaysStoppedAnimation(
-                                              90 / 360),
-                                          child: Image.asset(
-                                            "assets/png/yellow_chair.png",
-                                            width: 24,
-                                            height: 24,
-                                          )),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  RotationTransition(
-                                      turns:
-                                          new AlwaysStoppedAnimation(180 / 360),
                                       child: Image.asset(
                                         "assets/png/yellow_chair.png",
                                         width: 24,
                                         height: 24,
-                                      )),
-                                ],
+                                      ),
+                                    ),),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    RotationTransition(
+                                        turns:
+                                            new AlwaysStoppedAnimation(180 / 360),
+                                        child: Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: selectedTableId=="T9"? Colours.yellow.withOpacity(0.3): Colors.transparent,
+                                            spreadRadius: 1,
+                                            blurRadius: 1,
+                                            // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Image.asset(
+                                        "assets/png/yellow_chair.png",
+                                        width: 24,
+                                        height: 24,
+                                      ),
+                                    ),),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -941,7 +1536,6 @@ class _TpState extends State<TableBooking> {
                   initialSelectedDate: DateTime.now(),
                   selectionColor: Colors.yellow,
                   selectedTextColor: Colours.dark,
-                  
                   onDateChange: (dat) {
                     // New date selected
                     setState(() {
@@ -977,7 +1571,7 @@ class _TpState extends State<TableBooking> {
     );
   }
 
-  void ShowTime() { 
+  void ShowTime() {
     showAdaptiveActionSheet(
       context: context,
       title: const Text(
