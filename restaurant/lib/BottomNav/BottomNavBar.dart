@@ -15,12 +15,15 @@ import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 import 'package:flutter_qr_bar_scanner/qr_bar_scanner_camera.dart';
 
 Stream<QuerySnapshot<Object?>> special_all = Stream.empty();
+Stream<QuerySnapshot<Object?>> resto_all = Stream.empty();
 
 class BottomNavBar extends StatefulWidget {
   Stream<QuerySnapshot<Object?>> special = Stream.empty();
+  Stream<QuerySnapshot<Object?>> resto = Stream.empty();
 
-  BottomNavBar(this.special, {Key? key}) : super(key: key) {
+  BottomNavBar(this.resto, this.special, {Key? key}) : super(key: key) {
     special_all = this.special;
+    resto_all = this.resto;
   }
 
   @override
@@ -294,6 +297,7 @@ class _SecondState extends State<Second> {
 
   void navigate(String? code) {
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => MenuScreen(code: code, special: special_all)));
+        builder: (context) =>
+            MenuScreen(code: code, special: special_all, resto: resto_all)));
   }
 }
