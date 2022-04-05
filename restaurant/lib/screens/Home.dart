@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant/Constants/Colours.dart';
 import 'package:restaurant/Constants/strings.dart';
@@ -13,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selecind = 0;
+  var homeCategoryList=["Desert","Main Course","Break Fast"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,6 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontWeight: FontWeight.w300),
                       destinations: const [
                         NavigationRailDestination(
+                          
                           icon: SizedBox.shrink(),
                           label: Padding(
                             padding: EdgeInsets.symmetric(vertical: 8),
@@ -139,26 +142,35 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ),
-                        NavigationRailDestination(
-                          icon: SizedBox.shrink(),
-                          label: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8),
-                            child: RotatedBox(
-                              quarterTurns: -1,
-                              child: Text(
-                                "Lunch",
-                              ),
-                            ),
-                          ),
-                        ),
+                        
                       ],
                     ),
                   ),
                   SizedBox(
                     width: 10,
                   ),
-                
-                  Container(
+                 StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection("resto_carousel")
+                        .snapshots(),
+                    builder: (context, carouselsnapshot) {
+                      if (carouselsnapshot.connectionState ==
+                          ConnectionState.waiting) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      var carousel_List=carouselsnapshot.data!.docs;
+                      var carousel_sliderList=[];
+                      int j=0;
+                      for(int i=0;i<carousel_List.length;i++){
+                        if(carousel_List[i]['type']==homeCategoryList[selecind]){
+                          carousel_sliderList.add(Carousel(carousel_List[i],j));
+                          j++;
+                        }
+                      }
+
+                return  Container(
                     height: 500,
                     width: MediaQuery.of(context).size.width -
                         (MediaQuery.of(context).size.width / 7) -
@@ -168,8 +180,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       options: CarouselOptions(height: 500.0,
                             enlargeCenterPage: true,
                             reverse: false),
-                      items: [1, 2, 3, 4, 5,6].map((i) {
-                        int inde=i;
+                      items: carousel_sliderList.map((i) {
+                        var item=i.item;
+                        int index=i.index;
                         return Builder(
                           builder: (BuildContext context) {
                             return Container(
@@ -179,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25)),
-                                color: inde%2==0?Color(0xffebd96a):Colours.icon_color,
+                                color: index%2==0? Colours.icon_color:Colours.yellow,
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(16.0),
@@ -200,8 +213,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(10)),
                                               image: DecorationImage(
-                                                  image: AssetImage(
-                                                    "assets/images/desert1.jpg",
+                                                  image: NetworkImage(
+                                                    item['img'],
                                                   ),
                                                   fit: BoxFit.cover)),
                                         ),
@@ -211,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       height: 40,
                                     ),
                                     Text(
-                                      "Desert",
+                                      item['name'],
                                       style: GoogleFonts.lato(
                                           fontSize: 28,
                                           color: Colours.dark,
@@ -254,7 +267,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       }).toList(),
                     ),
-                  )
+                  );
+               
+                    })
                 ],
               ),
             )
@@ -263,4 +278,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+}
+
+
+class Carousel{
+  var item;
+  int? index;
+
+  Carousel(this.item,this.index);
 }
