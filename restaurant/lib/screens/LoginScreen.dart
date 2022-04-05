@@ -131,7 +131,7 @@ void addTokenAndName(String name) async{
 
     List<String> list=[];
     list.add(prefs.getString("token")!);
-    sendNotification(list, "Login", "Hello Yash");
+    // sendNotification(list, "Login", "Hello Yash");
 }
 
 Future<Response> sendNotification(List<String> tokenIdList, String contents, String heading) async{
