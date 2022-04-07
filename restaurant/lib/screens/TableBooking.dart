@@ -1266,27 +1266,7 @@ class _TpState extends State<TableBooking> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     IconButton(
-                      //       onPressed: () {},
-                      //       icon: Icon(
-                      //         Icons.arrow_back,
-                      //         color: Colors.white,
-                      //         size: 28,
-                      //       ),
-                      //     ),
-                      //     IconButton(
-                      //       onPressed: () {},
-                      //       icon: Icon(
-                      //         Icons.qr_code_scanner_rounded,
-                      //         color: Colors.white,
-                      //         size: 28,
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
+                      
                       SizedBox(
                         height: 30,
                       ),
