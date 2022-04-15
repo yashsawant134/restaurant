@@ -1,0 +1,48 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "clsnxt",
+            "cwd": "Flutter_Projects\\clsnxt",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "clsnxt (profile mode)",
+            "cwd": "Flutter_Projects\\clsnxt",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "clsnxt (release mode)",
+            "cwd": "Flutter_Projects\\clsnxt",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "firstproject",
+            "cwd": "Flutter_Projects\\firstproject",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "firstproject (profile mode)",
+            "cwd": "Flutter_Projects\\firstproject",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "firstproject (release mode)",
+            "cwd": "Flutter_Projects\\firstproject",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
