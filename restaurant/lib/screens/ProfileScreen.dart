@@ -7,6 +7,7 @@ import 'package:restaurant/Admin/Screens/AdminHome.dart';
 import 'package:restaurant/BottomNav/BottomNavBar.dart';
 import 'package:restaurant/Constants/Colours.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:restaurant/screens/Home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -65,7 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Column(
                   children: [
                     Text(
-                      "Hey",
+                      lang_code=="1" ? "Hi" :"हैलो",
                       style: GoogleFonts.davidLibre(
                           fontSize: 45,
                           color: Colors.white,

@@ -20,6 +20,7 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
+String val = "1";
 TextEditingController nameController = new TextEditingController();
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -82,30 +83,80 @@ class _LoginScreenState extends State<LoginScreen> {
                       controller: nameController,
                     ),
                   ),
-
-                  SizedBox(height: 25,),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        child: Expanded(
+                          child: ListTile(
+                            title: Text("English"),
+                            textColor: Color.fromRGBO(255, 193, 7, 1),
+                            leading: Radio(
+                              value: "1",
+                              groupValue: val,
+                              onChanged: (value) {
+                                setState(() {
+                                  val = value.toString();
+                                });
+                              },
+                              activeColor: Colors.green,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListTile(
+                          title: Text("Hindi"),
+                          textColor: Color.fromRGBO(255, 193, 7, 1),
+                          leading: Radio(
+                            value: "2",
+                            groupValue: val,
+                            onChanged: (value) {
+                              setState(() {
+                                val = value.toString();
+                                Fluttertoast.showToast(
+                                  msg: val, // message
+                                  toastLength: Toast.LENGTH_SHORT, // length
+                                  gravity: ToastGravity.CENTER, // location
+                                );
+                              });
+                            },
+                            activeColor: Colors.green,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   InkWell(
-                    onTap: (){
+                    onTap: () {
                       addTokenAndName(nameController.text);
                       Navigator.of(context).popUntil((route) => route.isFirst);
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => BottomNavBar(special)));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  BottomNavBar(special)));
                     },
                     child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 55,
-                            decoration: BoxDecoration(
-                                color: Colours.yellow,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20))),
-                            child: Center(
-                                child: Text(
-                              "That's my name",
-                              style: GoogleFonts.lato(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
-                            )),
-                          ),
+                      width: MediaQuery.of(context).size.width,
+                      height: 55,
+                      decoration: BoxDecoration(
+                          color: Colours.yellow,
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: Center(
+                          child: Text(
+                        "That's my name",
+                        style: GoogleFonts.lato(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600),
+                      )),
+                    ),
                   ),
                 ],
               ),
@@ -117,48 +168,49 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-void addTokenAndName(String name) async{
- final status = await OneSignal.shared.getDeviceState();
-    final String? token = status?.userId;
+void addTokenAndName(String name) async {
+  final status = await OneSignal.shared.getDeviceState();
+  final String? token = status?.userId;
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString('userName', name);
   prefs.setString("token", token!);
+  prefs.setString("langId", val);
    Fluttertoast.showToast(
       msg:   token, // message
       toastLength: Toast.LENGTH_SHORT, // length
       gravity: ToastGravity.CENTER, // location
     );
 
-    List<String> list=[];
-    list.add(prefs.getString("token")!);
-    // sendNotification(list, "Login", "Hello Yash");
+  List<String> list = [];
+  list.add(prefs.getString("token")!);
+  // sendNotification(list, "Login", "Hello Yash");
 }
 
-Future<Response> sendNotification(List<String> tokenIdList, String contents, String heading) async{
+Future<Response> sendNotification(
+    List<String> tokenIdList, String contents, String heading) async {
+  return await post(
+    Uri.parse('https://onesignal.com/api/v1/notifications'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, dynamic>{
+      "app_id":
+          OneSignalAppId, //kAppId is the App Id that one get from the OneSignal When the application is registered.
 
-    return await post(
-      Uri.parse('https://onesignal.com/api/v1/notifications'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, dynamic>
-      {
-        "app_id": OneSignalAppId,//kAppId is the App Id that one get from the OneSignal When the application is registered.
-          
-        "include_player_ids": tokenIdList,//tokenIdList Is the List of All the Token Id to to Whom notification must be sent.
-          
-          // android_accent_color reprsent the color of the heading text in the notifiction
-        "android_accent_color":"FF9976D2",
-          
-        "small_icon":"ic_stat_onesignal_default",
-        
-        "large_icon":"https://www.filepicker.io/api/file/zPloHSmnQsix82nlj9Aj?filename=name.jpg",
-          
-        "headings": {"en": heading},
-          
-        "contents": {"en": contents},
-          
-        
-      }),
-    );
-  }
+      "include_player_ids":
+          tokenIdList, //tokenIdList Is the List of All the Token Id to to Whom notification must be sent.
+
+      // android_accent_color reprsent the color of the heading text in the notifiction
+      "android_accent_color": "FF9976D2",
+
+      "small_icon": "ic_stat_onesignal_default",
+
+      "large_icon":
+          "https://www.filepicker.io/api/file/zPloHSmnQsix82nlj9Aj?filename=name.jpg",
+
+      "headings": {"en": heading},
+
+      "contents": {"en": contents},
+    }),
+  );
+}

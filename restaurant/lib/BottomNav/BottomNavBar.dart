@@ -32,7 +32,6 @@ class BottomNavBar extends StatefulWidget {
 int pageIndex = 0;
 String? Custname="";
 String? Custtoken="";
-
 final ScreenPages = [HomeScreen(), TableBooking(), Wallet(), ProfileScreen()];
 
 class _BottomNavBarState extends State<BottomNavBar> {
@@ -44,8 +43,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
   }
   void getNameAndToken() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    Custname=prefs.getString("userName");
-    Custtoken=prefs.getString("token");
+    Custname=await prefs.getString("userName");
+    Custtoken=await prefs.getString("token");
+     Fluttertoast.showToast(
+                                  msg: Custname!, // message
+                                  toastLength: Toast.LENGTH_SHORT, // length
+                                  gravity: ToastGravity.CENTER, // location
+                                );
   }
   @override
   Widget build(BuildContext context) {
@@ -321,6 +325,7 @@ class _SecondState extends State<Second> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? name=prefs.getString("userName");
     String? token=prefs.getString("token");
+    
     FirebaseFirestore.instance.collection('tables').doc(code).update({'cust_name':name,'isfull':true,'time':DateFormat.jm().format(DateTime.now()),'token':token});
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => MenuScreen(code: code, special: special_all)));

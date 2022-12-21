@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant/Constants/Colours.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:restaurant/screens/Home.dart';
 import 'package:restaurant/screens/MenuScreen.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -13,6 +14,7 @@ class Wallet extends StatefulWidget {
 }
 
 class _WalletState extends State<Wallet> {
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +29,7 @@ class _WalletState extends State<Wallet> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Track",
+                  lang_code=="1" ? "Track" :"ट्रैक करें",
                   style: GoogleFonts.davidLibre(
                       fontSize: 45,
                       color: Colours.yellow,
@@ -37,7 +39,7 @@ class _WalletState extends State<Wallet> {
                   height: 10,
                 ),
                 Text(
-                  "Your order",
+                  lang_code=="1" ? "Your order" :"आपका ऑर्डर",
                   style: GoogleFonts.davidLibre(
                       fontSize: 35,
                       color: Colors.white,
@@ -152,7 +154,7 @@ class _WalletState extends State<Wallet> {
                     ),
 
                     Text(
-                  "No order yet",
+                  lang_code=="1" ? "No order yet" :"अभी तक कोई आदेश नहीं",
                   style: TextStyle(
                       fontSize: 35,
                       color: Colours.yellow,
@@ -160,14 +162,14 @@ class _WalletState extends State<Wallet> {
                 ),
                 SizedBox(height: 10,),
                 Text(
-                  "You're cart is empty",
+                  lang_code=="1" ? "You're cart is empty" :"आपका कार्ट खाली है",
                   style:  TextStyle(
                       fontSize: 19,
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "Add something from the menu",
+                  lang_code=="1" ? "Add something from the menu" :"मेनू से कुछ चुनें",
                   style:  TextStyle(
                       fontSize: 19,
                       color: Colors.white,
@@ -184,7 +186,7 @@ class _WalletState extends State<Wallet> {
                     ),
 
                     Text(
-                  "No order yet",
+                  lang_code=="1" ? "No order yet" :"अभी तक कोई आदेश नहीं",
                   style: TextStyle(
                       fontSize: 35,
                       color: Colours.yellow,
@@ -192,14 +194,14 @@ class _WalletState extends State<Wallet> {
                 ),
                 SizedBox(height: 10,),
                 Text(
-                  "You're cart is empty",
+                  lang_code=="1" ? "You're cart is empty" :"आपकी कार्ट खाली है",
                   style:  TextStyle(
                       fontSize: 19,
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "Add something from the menu",
+                  lang_code=="1" ? "Add something from the menu" :"मेनू से कुछ चुनें",
                   style:  TextStyle(
                       fontSize: 19,
                       color: Colors.white,

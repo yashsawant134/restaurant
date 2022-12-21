@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.yellow,
       ),
-      home: userName==null?AdminHome():BottomNavBar(special),
+      home: userName==null?AdminHome():BottomNavBar(special),  //LoginScreen,AdminHome
     );
   }
 }

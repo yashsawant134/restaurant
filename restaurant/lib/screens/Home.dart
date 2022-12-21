@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:restaurant/BottomNav/BottomNavBar.dart';
 import 'package:restaurant/Constants/Colours.dart';
 import 'package:restaurant/Constants/strings.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,10 +13,24 @@ class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
+  var homeCategoryList=["Desert","Main Course","Break Fast"];
 
+String? lang_code="";
 class _HomeScreenState extends State<HomeScreen> {
   int selecind = 0;
-  var homeCategoryList=["Desert","Main Course","Break Fast"];
+   void initState() {
+    // TODO: implement initState
+    super.initState();
+    getLangId();  
+   }
+
+   void getLangId() async{
+         SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+           lang_code= prefs.getString("langId");
+
+    });
+   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    Strings.let_eat,
+                   lang_code=="1"? Strings.let_eat :"चलो खाते हैं",
                     style: GoogleFonts.davidLibre(
                         fontSize: 45,
                         color: Colours.yellow,
@@ -69,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 10,
                   ),
                   Text(
-                    Strings.nutrious_food,
+                   lang_code=="1"?  Strings.nutrious_food :"पौष्टिक आहार",
                     style: GoogleFonts.davidLibre(
                         fontSize: 35,
                         color: Colors.white,
@@ -104,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colours.icon_color,
                           fontSize: 22,
                           fontWeight: FontWeight.w300),
-                      destinations: const [
+                      destinations:  [
                         NavigationRailDestination(
                           
                           icon: SizedBox.shrink(),
@@ -113,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: RotatedBox(
                               quarterTurns: -1,
                               child: Text(
-                                "Desert",
+                               lang_code=="1"? "Desert":"मिठाई",
                               ),
                             ),
                           ),
@@ -125,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: RotatedBox(
                               quarterTurns: -1,
                               child: Text(
-                                "Main Course",
+                              lang_code=="1" ? "Main Course":"मेन कोर्स",
                               ),
                             ),
                           ),
@@ -137,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: RotatedBox(
                               quarterTurns: -1,
                               child: Text(
-                                "Break Fast",
+                               lang_code=="1" ?  "Break Fast" :"नाश्ता",
                               ),
                             ),
                           ),
@@ -245,7 +261,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       height: 3,
                                     ),
                                     Text(
-                                      "Food Plate",
+                                      lang_code=="1" ? "Food Plate" :"खाने की थाली",
                                       style: GoogleFonts.lato(
                                           fontSize: 24,
                                           color: Colours.dark,
@@ -253,7 +269,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     SizedBox(height: 40),
                                     Text(
-                                      "A unique experience of tase and delicious incgridents prepared for you with step by step instruction",
+                                      lang_code=="1" ? "A unique experience of taste and delicious ingredients prepared for you with step by step instruction" :"चरण-दर-चरण निर्देश के साथ आपके लिए तैयार स्वाद और स्वादिष्ट सामग्री का एक अनूठा अनुभव",
                                       style: GoogleFonts.lato(
                                           fontSize: 19,
                                           color: Colours.dark,

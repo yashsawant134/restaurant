@@ -7,6 +7,7 @@ import 'package:restaurant/Constants/Colours.dart';
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 import 'package:intl/intl.dart';
+import 'package:restaurant/screens/Home.dart';
 
 class TableBooking extends StatefulWidget {
   TableBooking({Key? key}) : super(key: key);
@@ -1466,7 +1467,7 @@ var tablesList=[];
                         height: 30,
                       ),
                       Text(
-                        "Toyo Eatery",
+                        lang_code=="1" ? "Dynamic Cuisines" :"डायनामिक कुइसिन",
                         style: GoogleFonts.davidLibre(
                             fontSize: 45,
                             color: Colors.white,
@@ -1487,7 +1488,7 @@ var tablesList=[];
                                     BorderRadius.all(Radius.circular(20))),
                             child: Center(
                               child: Text(
-                                "Grand atrium",
+                                lang_code=="1" ? "Grand atrium" :"ग्रैंड एट्रियम",
                                 style: GoogleFonts.davidLibre(
                                     color: Colors.white, fontSize: 18),
                               ),
@@ -1506,7 +1507,7 @@ var tablesList=[];
                             ),
                             child: Center(
                               child: Text(
-                                "Outside",
+                                lang_code=="1" ? "Outside" :"बाहर",
                                 style: GoogleFonts.davidLibre(
                                     color: Colors.white, fontSize: 18),
                               ),
@@ -1551,7 +1552,8 @@ var tablesList=[];
                         SizedBox(
                           height: 12,
                         ),
-                        Text("Schedule a visit",
+                        Text(
+                          lang_code=="1" ? "Schedule a visit" :"यात्रा का समय निर्धारित करें",
                             style: GoogleFonts.davidLibre(
                                 color: Colors.white,
                                 fontSize: 24,
@@ -1609,7 +1611,8 @@ var tablesList=[];
                         ),
                         Row(
                           children: [
-                            Text("How many you are?",
+                            Text(
+                              lang_code=="1" ? "How many are you?" :"आप कितने हैं?",
                                 style: GoogleFonts.davidLibre(
                                     color: Colors.white,
                                     fontSize: 24,
@@ -1696,7 +1699,7 @@ var tablesList=[];
                                     BorderRadius.all(Radius.circular(20))),
                             child: Center(
                                 child: Text(
-                              "Book a table",
+                              lang_code=="1" ? "Book a table" :"तालिका आरक्षित करें",
                               style: GoogleFonts.lato(
                                   color: Colors.black,
                                   fontSize: 20,
@@ -1744,7 +1747,7 @@ var tablesList=[];
                   children: [
                     Icon(Icons.calendar_month_rounded,color:Colours.yellow,size:80),
                     SizedBox(height: 8,),
-                    Text("Are you sure",style:TextStyle(decoration: TextDecoration.none,color: Colors.white,fontSize: 18,fontWeight: FontWeight.w700),),
+                    Text(lang_code=="1" ? "Are you sure ?" :"क्या आप निश्चय करना चाहते हैं ?",style:TextStyle(decoration: TextDecoration.none,color: Colors.white,fontSize: 18,fontWeight: FontWeight.w700),),
                     SizedBox(height: 10,),
                     Text(date +" "+time_now,style:TextStyle(decoration: TextDecoration.none,color: Colors.white,fontSize: 18,fontWeight: FontWeight.w500),)
                   ],
@@ -1771,7 +1774,7 @@ var tablesList=[];
                     height: 50,
                     decoration: BoxDecoration(color: Colours.yellow, borderRadius: BorderRadius.circular(20)),
                   
-                    child: Center(child: Text("Yes Book",style:TextStyle(decoration: TextDecoration.none,color: Colours.dark,fontSize: 21,fontWeight: FontWeight.bold),)),
+                    child: Center(child: Text(lang_code=="1" ? "Yes Book" :"आरक्षित करें",style:TextStyle(decoration: TextDecoration.none,color: Colours.dark,fontSize: 21,fontWeight: FontWeight.bold),)),
                   ),
                 ))
               ],
@@ -1805,7 +1808,7 @@ var tablesList=[];
     showAdaptiveActionSheet(
       context: context,
       title: const Text(
-        'Choose preferable date',
+        'Choose preferable date',    //lang_code=="1" ? 'Choose preferable date':'बेहतर तिथि चुनें',
         style: TextStyle(color: Colors.yellow),
       ),
       androidBorderRadius: 30,
